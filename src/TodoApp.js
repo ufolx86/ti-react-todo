@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 
 function TodoApp() {
   return <h1>Todo List</h1>;
