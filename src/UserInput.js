@@ -8,77 +8,70 @@ export default class UserInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activityToAdd: '',
+            taskToAdd: '',
             showAlert: false,
-            todoListOptions : ["Shower", "Breakfast", "Wash Teeth", "Check e-mail", "Code Project", "Customer Meeting", "Lunch"]
         };
+        this.addTask = this.addTask.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
-        this.submitActivity = this.submitActivity.bind(this);
+        // this.submitActivity = this.submitActivity.bind(this);
     }
 
-
-    options = this.state.todoListOptions.map((option) => {
-        return (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        )
-    })
+    addTask() {
+        // AVOID EMPTY STRINGS
+        if (this.state.taskToAdd === "") {
+            // this.setState({showAlert:true});
+            return;
+        // CHECK FOR REPEATED ACTIVITIES
+        } else if (this.props.todoList.indexOf(this.state.taskToAdd) > -1){
+            // this.setState({showAlert:true});
+            console.log("Activity already exists.")
+            return
+        } else {
+            this.props.addTask(this.state.taskToAdd);
+            this.setState({ taskToAdd: "" });
+        }
+    }
 
     handleUpdate(event) {
-        this.setState({ value: event.target.value });
-      }
-
-    submitActivity () {
-        // if (this.state.activityToAdd.length) {
-        //     this.props.addTodo(this.state.value);
-        //     this.setState({ value: "" });
-        // }
-        if (this.state.activityToAdd === "") {
-            console.log("EMPTY")
-            this.setState({showAlert:true})
-            this.state.todoListOptions.push("EMPTY")
-        } else {
-            this.state.todoListOptions.push(this.state.activityToAdd)
-            this.setState({ activityToAdd: "" });
-        }
+        this.setState({ taskToAdd: event.target.value });
     }
 
     render() {
         return (
             <div className="input">
-                <h3>Add New Activity</h3>
-                <Form>
-                    <Form.Group controlId="activity">
-                        <Form.Label>Activity Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={this.state.activityToAdd}
-                            onChange={this.handleUpdate}
-                            placeholder="Enter an activity"
-                        />
-                        <Form.Text className="text-muted">
-                        Please use a concise name.
-                        </Form.Text>
-                    </Form.Group>
-                </Form>
+                <b-container fluid lg="6">
+                    <Form>
+                        <Form.Group controlId="activity">
+                            <Form.Label>Activity Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={this.state.taskToAdd}
+                                onChange={this.handleUpdate}
+                                placeholder="Enter an activity"
+                            />
+                            <Form.Text className="text-muted">
+                            Please use a concise name.
+                            </Form.Text>
+                        </Form.Group>
+                    </Form>
+                </b-container>
                
                 <Button
                     variant="primary"
-                    onClick={this.submitActivity}
+                    onClick={this.addTask}
                 >
-                    Submit Activity
+                    Add Task
                 </Button>{' '}
 
                 {/* <Button variant="danger">Delete</Button>{' '} */}
-                <Form>
+                {/* <Form>
                     <Form.Control 
                         as="select"
                     >
                         {this.options}
                     </Form.Control>
-                </Form>
-                <Alert 
+                </Form> */}
+                {/* <Alert 
                     variant="danger"
                     onClose={() => this.setState({showAlert:false})}
                     dismissible
@@ -87,7 +80,7 @@ export default class UserInput extends Component {
                     <p>
                     Either you did not enter an activity or the activity is already defined.
                     </p>
-                </Alert>
+                </Alert> */}
             </div>
         )
     }
