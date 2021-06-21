@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-// import ListItem from './ListItem';
-
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        let task;
-        // let todoList = this.props.todoList;
-        // this.removeTask = this.removeTask.bind(this);
+        this.removeTask = this.removeTask.bind(this);
     }
-    removeTask(event) {
+    removeTask(task) {
         // console.log(this.state.todoList.indexOf(event.target.value))
-        this.props.removeTask(2)
+        let id = this.props.todoList.indexOf(task);
+        // console.log(this.props.todoList);
+        // console.log(test);
+        this.props.removeTask(id);
+        // console.log(this.props.todoList);
     }
     tasks = this.props.todoList.map((task) =>
         <div>
@@ -32,7 +32,7 @@ export default class TodoList extends React.Component {
                                 <Col lg="2">
                                     <Button
                                         variant="danger"
-                                        onClick={this.removeTask()}
+                                        onClick={() => this.removeTask(task)}
                                     >
                                         Delete
                                     </Button>{' '}
