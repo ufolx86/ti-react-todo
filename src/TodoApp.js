@@ -1,5 +1,7 @@
 // import './App.css';
 import React, {Component} from 'react';
+import Container from 'react-bootstrap/Container';
+
 import UserInput from './UserInput'
 import TodoList from './TodoList'
 
@@ -24,7 +26,6 @@ class TodoApp extends React.Component {
         });
     }
     removeTask(id) {
-        console.log("REACHING REMOVE")
         this.setState((state) => {
             const todoList = state.todoList.filter((task) => task.id !== id);
             return {
@@ -46,16 +47,18 @@ class TodoApp extends React.Component {
     render() {
         return (
             <div>
-                <h1>Test Todo List Interview</h1>
-                <UserInput 
-                    addTask = {this.addTask}
-                    todoList = {this.state.todoList}
-                />
-                <TodoList 
-                    todoList = {this.state.todoList}
-                    removeTask = {this.removeTask}
-                    updateTaskList = {this.updateTaskList}
-                />
+                <Container>
+                    <h1>Test Todo List Interview</h1>
+                    <UserInput 
+                        addTask = {this.addTask}
+                        todoList = {this.state.todoList}
+                    />
+                    <TodoList 
+                        todoList = {this.state.todoList}
+                        removeTask = {this.removeTask}
+                        updateTaskList = {this.updateTaskList}
+                    />
+                </Container>
             </div>
 
         );
