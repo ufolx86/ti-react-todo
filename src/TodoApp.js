@@ -28,11 +28,11 @@ class TodoApp extends React.Component {
     removeTask(id) {
         this.setState(
             (state) => {
-            const todoList = state.todoList.filter((task) =>  !== id);
-            console.log(todoList)
-            return {
-                todoList: todoList
-            }
+            // const todoList = state.todoList.filter((task) =>  !== id);
+            // console.log(todoList)
+            // return {
+            //     todoList: todoList
+            // }
         });
     }
     updateTaskList() {
