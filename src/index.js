@@ -7,8 +7,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import TodoApp from './TodoApp';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <TodoApp />
-  </React.StrictMode>,
+    <TodoApp />,
   document.getElementById('root')
 );

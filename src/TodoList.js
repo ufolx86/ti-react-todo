@@ -8,15 +8,14 @@ import Col from 'react-bootstrap/Col';
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            todoList: this.props.todoList
+        };
         this.removeTask = this.removeTask.bind(this);
     }
     removeTask(task) {
-        // console.log(this.state.todoList.indexOf(event.target.value))
         let id = this.props.todoList.indexOf(task);
-        // console.log(this.props.todoList);
-        // console.log(test);
         this.props.removeTask(id);
-        // console.log(this.props.todoList);
     }
     tasks = this.props.todoList.map((task) =>
         <div>

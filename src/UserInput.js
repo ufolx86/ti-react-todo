@@ -12,7 +12,9 @@ export default class UserInput extends Component {
         super(props);
         this.state = {
             modalText: '',
+            modalTitle:'',
             taskToAdd: '',
+            todoList: this.props.todoList,
             showAlert: false,
         };
         this.addTask = this.addTask.bind(this);
@@ -24,11 +26,13 @@ export default class UserInput extends Component {
     addTask() {
         // AVOID EMPTY STRINGS
         if (this.state.taskToAdd === "") {
+            this.setState({modalTitle:"Empty Task"});
             this.setState({modalText:"Please enter a name for the task"});
             this.setState({showAlert:true});
             return;
         // CHECK FOR REPEATED ACTIVITIES
         } else if (this.props.todoList.indexOf(this.state.taskToAdd) > -1){
+            this.setState({modalTitle:"Duplicate Task"})
             this.setState({modalText:`The Task "${this.state.taskToAdd}" already exists. Please enter a different task.`});
             this.setState({showAlert:true});
             return
@@ -83,7 +87,7 @@ export default class UserInput extends Component {
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Duplicate Task</Modal.Title>
+                        <Modal.Title>{this.state.modalTitle}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {this.state.modalText}

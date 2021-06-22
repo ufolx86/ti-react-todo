@@ -1,5 +1,5 @@
 // import './App.css';
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import UserInput from './UserInput'
@@ -8,43 +8,63 @@ import TodoList from './TodoList'
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
-        // let todoList;
+        let localTodoList = [];
         this.state = {
             todoList : ["Shower", "Breakfast", "Wash Teeth", "Check e-mail", "Code Project", "Customer Meeting", "Lunch"]
 
         };
         this.addTask = this.addTask.bind(this);
         this.removeTask = this.removeTask.bind(this);
-        this.updateTaskList = this.updateTaskList.bind(this);
+        // this.updateTaskList = this.updateTaskList.bind(this);
     }
+    addTask(newTask) {
 
-    addTask (newTask) {
-        this.setState((state) => {
-            const todoList = state.todoList.push(newTask)
-            console.log(state.todoList)
-            return todoList
-        });
-    }
-    removeTask(id) {
         this.setState(
             (state) => {
-            // const todoList = state.todoList.filter((task) =>  !== id);
-            // console.log(todoList)
-            // return {
-            //     todoList: todoList
-            // }
-        });
-    }
-    updateTaskList() {
-        this.setState(
-            function(state) {
-                // const todoList = state.todoList.map(task) => {
-                //     return (
-                        
-                //     )
-                // }
+                const localTodoList = state.todoList.concat(newTask);
+                console.log(localTodoList)
+                return {
+                    todoList:localTodoList
+                };
             }
         )
+        // useEffect(() => {
+
+        // });
+        console.log(this.state.todoList)
+    }
+
+    removeTask(id) {
+        // console.log(id)
+        // this.setState({ todoList: this.state.todoList.filter((task) => task !== this.state.todoList[id]) }, () => {
+        //     console.table(this.state.todoList);
+        // });
+
+        this.setState(
+            (state) => {
+              const localTodoList = state.todoList.filter((task) => task !== this.state.todoList[id]);
+              console.table(localTodoList)
+              return {
+                todoList: localTodoList
+              };
+            },
+        );
+        // this.setState(
+        //     (state) => {
+        //         todoList: state.todoList.filter(function(task) { 
+        //             return task !== this.state.todoList[id]
+        //         })
+        //     }
+        // );
+        // this.setState(
+        //     (state) => {
+        //         if (id>=0) {
+        //             const localTodoList = state.todoList.splice(id,1)
+        //             console.table(localTodoList)
+        //             return {todoList: localTodoList}
+        //         }
+        //     }
+        // )
     }
     render() {
         return (
