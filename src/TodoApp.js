@@ -1,5 +1,5 @@
 // import './App.css';
-import React, {useState, useEffect } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 
 import UserInput from './UserInput'
@@ -8,7 +8,6 @@ import TodoList from './TodoList'
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
-        let localTodoList = [];
         this.state = {
             todoList : ["Shower", "Breakfast", "Wash Teeth", "Check e-mail", "Code Project", "Customer Meeting", "Lunch"]
 
@@ -28,9 +27,6 @@ class TodoApp extends React.Component {
                 };
             }
         )
-        // useEffect(() => {
-
-        // });
         console.log(this.state.todoList)
     }
 
